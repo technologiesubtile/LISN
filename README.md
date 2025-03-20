@@ -6,7 +6,7 @@ A LISN is a box that presents a well-defined source impedance to an electrical c
 ![eevblog_cispr_lisn_schematics](https://github.com/user-attachments/assets/2d3cc524-24a0-46f3-85c0-db89c3493d5f)
 
 
-Here is the schematics of a LISN that is quite standard, it is sold as Tekbox and the schematics and even the gerber files of the layout are published on the manufacturers website. It is a 5 µH, 50 Ohm version for voltage < 200 V and current < 10 A. This can be used to check compliance with standards such as CISPR25 for automotive applications. It furthermore requires a spectrum analyzer to be connected to its coax output and to measure the spectrum from 150 kHz to 200 MHz, and to make sure it stays below the tolerable curve.
+Here is the schematics of a LISN that is quite standard, it is sold as Tekbox and the schematics and even the gerber files of the layout are published on the manufacturers website. It is a 5 µH, 50 Ohm version for voltage < 200 V and current < 10 A. This can be used to check compliance with standards such as CISPR25 for automotive applications. It furthermore requires a spectrum analyzer to be connected to its coax output and to measure the spectrum from 150 kHz to 100 MHz, and to make sure it stays below the tolerable curve.
 
 ![P3151803](https://github.com/user-attachments/assets/8381b36a-c79b-439b-8ef4-f32638255485)
 
