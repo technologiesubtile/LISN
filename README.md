@@ -50,8 +50,8 @@ So far we have established that the impedance is close enough to 50 Ohm between 
 ![P3201842](https://github.com/user-attachments/assets/6fc4d233-3d56-460a-bc73-1ae1cd67fbf1)  ![P3201837](https://github.com/user-attachments/assets/7046e02e-1e45-47d9-bc4d-0f9b6758e125)
 ![P3201839](https://github.com/user-attachments/assets/39417820-4aa4-4bbf-b5da-eebccb645d23)
 
-At 70 kHz, we measure even a negative inductance (= capacitanc), but at 640 kHz around 3.5 uH and at 2.2 MHz again 1.something uH. The conclusion is, at 640 kHz we are close to the 5 uH, but at lower frequency the inductive reactance becomes too small to be measured in S11 reflectance and at 2.2 Mh again the 50 Ohm real resistive load is dominant.
+At 70 kHz, we measure even a negative inductance (= capacitanc), but at 640 kHz around 3.5 uH and at 2.2 MHz again 1.something uH. The conclusion is, at 640 kHz we are close to the 5 uH, but at lower frequency the inductive reactance becomes too small to be measured in S11 reflectance and at 2.2 Mhz again the 50 Ohm real resistive load is dominant.
 
 To do better, we should do a 2-port shunt-through measurement. For this we first have to change the cabling, connect both coaxial cables in parallel to the 4 mm clamps, and then we must export the S21 data from the VNA and make a spreadsheet that converts it to component values. The only conversion that the nanoVNA can do natively is from S11 into a RLC series circuit.
 
-For the moment we shall assume that out LISN is close enough to the specifications. Surely it would not get accredited, but for some in-house precompliance testing it is good enough.
+For the moment we shall assume that our LISN is close enough to the specifications. Surely it would not get accredited, but for some in-house precompliance testing it is good enough.
