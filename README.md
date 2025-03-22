@@ -44,7 +44,7 @@ Third position, 30 MHz, 47 Ohm, not bad. Forth position, 100 MHz, 112 Ohm. Here 
 
 However, we can safely attribute this to the remaining length of the non-coaxial wiring inside the box. It should not bother us too much, taking into account that for the test setup, the EUT will be connected to the 4 mm clamps with a piece of non-coaxial wire of a length between 20 cm and 30 cm. So the ~ 8 cm length of cabling within the LISN should not deteriorate the result more than already does the outside wiring.
 
-So far we have established that the impedance is close enough to 50 Ohm between 10 MHz and 30 MHz, but we have not measured the inductance yet. For doing so, we shall focus on lower frequency range where the parallel LR circuit is dominated by the inductance. But for this omega.L should be below 5 Ohm and hence f < 300 kHz. However, this coincides with the impedance range where S11 reflection measurements become inacurate. Let's try anyway from 0 to 3 MHz.
+So far we have established that the impedance is close enough to 50 Ohm between 10 MHz and 30 MHz, but we have not measured the inductance yet. For doing so, we shall focus on lower frequency range where the parallel LR circuit is dominated by the inductance. But for this omega.L should be below 5 Ohm and hence f < 300 kHz. However, this coincides with the impedance range where S11 reflection measurements become inaccurate. Let's try anyway from 0 to 3 MHz.
 
 
 ![P3201842](https://github.com/user-attachments/assets/6fc4d233-3d56-460a-bc73-1ae1cd67fbf1)  ![P3201837](https://github.com/user-attachments/assets/7046e02e-1e45-47d9-bc4d-0f9b6758e125)
@@ -52,6 +52,16 @@ So far we have established that the impedance is close enough to 50 Ohm between 
 
 At 70 kHz, we measure even a negative inductance (= capacitanc), but at 640 kHz around 3.5 uH and at 2.2 MHz again 1.something uH. The conclusion is, at 640 kHz we are close to the 5 uH, but at lower frequency the inductive reactance becomes too small to be measured in S11 reflectance and at 2.2 Mhz again the 50 Ohm real resistive load is dominant.
 
-To do better, we should do a 2-port shunt-through measurement. For this we first have to change the cabling, connect both coaxial cables in parallel to the 4 mm clamps, and then we must export the S21 data from the VNA and make a spreadsheet that converts it to component values. The only conversion that the nanoVNA can do natively is from S11 into a RLC series circuit.
+To do better, we perform a 2-port shunt-through measurement. For this we first have to change the cabling and connect both coaxial cables in parallel to the 4 mm clamps.
 
-For the moment we shall assume that our LISN is close enough to the specifications. Surely it would not get accredited, but for some in-house precompliance testing it is good enough.
+![P3221845](https://github.com/user-attachments/assets/f25a4415-04a5-43b9-ab56-7e32835dbdcd)  ![P3221846](https://github.com/user-attachments/assets/56fc96b6-22d4-46f6-b767-765ec2d98639)
+
+Then we measure the two ranges, from 100 kHz to 3 MHz, and from 1 MHz to 100 MHz. This time we use the nanoVNA saver software.
+
+![S21Zshunt_100kto3M](https://github.com/user-attachments/assets/d3dfdc59-cc76-4129-aa59-bbc13261e1f8)  ![S21Zshunt_1Mto100M](https://github.com/user-attachments/assets/d6bed62b-a2a9-4295-afb0-4bcd54d68b52)
+
+For the lower frequency range, it looks quite close to the expected value, at 300 kHz and Z = 7.5 Ohm we find L= 3.75 uH without taking into account the 50 Ohm real impedance in parallel. In the higher frequency range, the impedance still exceeds the CISPR25 boundary but much less than what we found with the single port measurement. We also find a little resonance peak at 34 MHz. 
+
+The software in contrast to the nanoVNA device can already convert the S21 of the two-port measurement to Z_shunt and further to a R + iX series circuit of the shunt. The nanoVNA itself can only derive component values from single port S11 measurements and also only into a series circuit. To decompose our Z_shunt into a parallel RL circuit, we would have to export the S21 data in touchstone format and make a spreadsheet that converts it to component values.
+
+In conclusion, our LISN is quite close to the specifications since it only excedes the boundaries at 100 MHz where Z is 62 Ohm instead of the limit of 57 Ohm. At low frequency the inductance is with its 3.75 uH a bit below the reference of 5 uH, but Z @ 1 MHz is 24 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
