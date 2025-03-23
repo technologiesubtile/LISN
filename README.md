@@ -60,8 +60,14 @@ Then we measure the two ranges, from 100 kHz to 3 MHz, and from 1 MHz to 100 MHz
 
 ![S21Zshunt_100kto3M](https://github.com/user-attachments/assets/d3dfdc59-cc76-4129-aa59-bbc13261e1f8)  ![S21Zshunt_1Mto100M](https://github.com/user-attachments/assets/d6bed62b-a2a9-4295-afb0-4bcd54d68b52)
 
-For the lower frequency range, it looks quite close to the expected value, at 300 kHz and Z = 7.5 Ohm we find L= 3.75 uH without taking into account the 50 Ohm real impedance in parallel. In the higher frequency range, the impedance still exceeds the CISPR25 boundary but much less than what we found with the single port measurement. We also find a little resonance peak at 34 MHz. 
+For the lower frequency range, it looks quite close to the expected value, at 300 kHz and Z = 7.5 Ohm we find L= 3.75 uH if we were to neglect the 50 Ohm real impedance in parallel. In the higher frequency range, the impedance still exceeds the CISPR25 boundary, 62 Ohm instead 57 Ohm, but much less than what we found with the single port measurement. We also find a little resonance peak at 34 MHz. 
 
 The software in contrast to the nanoVNA device can already convert the S21 of the two-port measurement to Z_shunt and further to a R + iX series circuit of the shunt. The nanoVNA itself can only derive component values from single port S11 measurements and also only into a series circuit. To decompose our Z_shunt into a parallel RL circuit, we would have to export the S21 data in touchstone format and make a spreadsheet that converts it to component values.
 
-In conclusion, our LISN is quite close to the specifications since it only excedes the boundaries at 100 MHz where Z is 62 Ohm instead of the limit of 57 Ohm. At low frequency the inductance is with its 3.75 uH a bit below the reference of 5 uH, but Z @ 1 MHz is 24 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
+We do so, and thereby realize that the calibration done in nanoVNA saver is no longer valid, because it transfers uncalibrated touchstone data and does the calibration in the soft. So we redo the measurements, for each range with its own device calibration, then import the touchstone data in the spreadsheet, and also concatenate the two ranges. The result :
+
+![lisn5uH50ohm_impedance_shuntthrough](https://github.com/user-attachments/assets/44dc48a3-0063-4242-8b62-b54dda2bb628)
+
+Note that we also use semilog axes here as in the reference from EEVblog, which would also have been possible in the nanoVNA saver software. Now we find even better values, L = 4.83 uH, and the impedance only rises to 61 Ohm at 100 MHz.
+
+In conclusion, our LISN is quite close to the specifications since it only slightly excedes the impedance boundary at 100 MHz. At low frequency the inductance is close to the reference of 5 uH, and Z @ 1 MHz is 23 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
