@@ -58,7 +58,9 @@ To do better, we perform a 2-port shunt-through measurement. For this we first h
 
 Then we measure the two ranges, from 100 kHz to 3 MHz, and from 1 MHz to 100 MHz. This time we use the nanoVNA saver software.
 
-![S21Zshunt_100kto3M](https://github.com/user-attachments/assets/d3dfdc59-cc76-4129-aa59-bbc13261e1f8)  ![S21Zshunt_1Mto100M](https://github.com/user-attachments/assets/d6bed62b-a2a9-4295-afb0-4bcd54d68b52)
+![S21Zshunt_100kto3M_sm](https://github.com/user-attachments/assets/0838e36d-35b6-409c-9222-cfb2f8f468bc)     ![S21Zshunt_1Mto100M_sm](https://github.com/user-attachments/assets/b91a936a-6058-4758-a617-a405e2b55ba6)
+
+
 
 For the lower frequency range, it looks quite close to the expected value, at 300 kHz and Z = 7.5 Ohm we find L= 3.75 uH if we were to neglect the 50 Ohm real impedance in parallel. In the higher frequency range, the impedance still exceeds the CISPR25 boundary, 62 Ohm instead 57 Ohm, but much less than what we found with the single port measurement. We also find a little resonance peak at 34 MHz. 
 
