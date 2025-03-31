@@ -34,9 +34,9 @@ Now let's acquire some curves in the range 1 MHz to 100 MHz:
 ![P3201828](https://github.com/user-attachments/assets/79e72d77-c586-4cc9-ab81-840ce5ab3410)  ![P3201844](https://github.com/user-attachments/assets/8266cff3-123a-41cd-a94b-ef1c064ddf58)
 ![P3201826](https://github.com/user-attachments/assets/b53afc89-86ca-4f1d-be5c-de4b3f909943)  ![P3201835](https://github.com/user-attachments/assets/cabad535-b50a-47a4-8927-bba2acd8b6df)
 
-Here the S11 parameter along with component values. But note that these values are the ones of a series circuit. Since we have a parallel circuit, we can only look at one of the values while the other is a negligibly high impedance.
+Here the S11 parameter along with component values. But note that the component values displayed by the NanoVNA are the ones of a series circuit. Since we have a parallel circuit, we can only look at one of the values while the other is a negligibly high impedance.
 
-The straight onset corresponds to only 2 measurement points, 100 kHz and 1.099 MHz so nothing shall be conluded from it. The first curve with the cursor at 1.099 MHz and a phase of like 45 degree correspond to a case where the impedance of the coil shall be around i*35 Ohm and the parallel resistive load is 50 Ohm which should result in something like 20 Ohm total. It shows around 15 Ohm.
+The straight onset corresponds to only 2 measurement points, 100 kHz and 1.099 MHz so nothing shall be conluded from it. The first curve with the cursor at 1.099 MHz and a phase of like 135 degree corresponds to a case where the impedance of the coil shall be around i*35 Ohm and the parallel resistive load is 50 Ohm which should result in something like 20 Ohm total. It shows around 15 Ohm.
 
 The second cursor reading about 9 MHz, and 35 Ohm. Now, the coil impedance becomes negligibly high and the impedance approaches 50 Ohm (roughly..) and the phase zero.
 
@@ -72,12 +72,22 @@ Note that we also use semilog axes here as in the reference from EEVblog, which 
 
 In conclusion, our LISN is quite close to the specifications since it only slightly excedes the impedance boundary at 100 MHz. At low frequency the inductance is close to the reference of 5 uH, and Z @ 1 MHz is 23 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
 
+Now we test a USB car charger. The setup is the car charger plugged into a cigarette lighter socket and connected to the LISN output. Attached to the USB charger is a power delivery trigger board that negotiates 12 V output, and a 25 W automotive light bulb (both filaments in parallel) as a load. On the right, the Tiny SA Ultra ZN-407 connected to the RF output of the LISN.
 
-![P3301856](https://github.com/user-attachments/assets/14b0b30d-408d-4514-85f1-5b6c8f2e1ebe) ![P3301855](https://github.com/user-attachments/assets/1b77e3b1-e0da-41b8-a32d-4b57c3f4872b)
+![P3301856](https://github.com/user-attachments/assets/14b0b30d-408d-4514-85f1-5b6c8f2e1ebe)  ![P3301855](https://github.com/user-attachments/assets/1b77e3b1-e0da-41b8-a32d-4b57c3f4872b)
 
+The LISN is powered by a lab power supply set to 14.8 V. The USB car charger measures 14.2 V :
 
-![P3301859](https://github.com/user-attachments/assets/766450e3-15d1-432a-996f-fb644abf65d2)  ![P3301858](https://github.com/user-attachments/assets/24f7163a-29e1-405d-b924-b4765fa1a93e)
+![P3301859](https://github.com/user-attachments/assets/766450e3-15d1-432a-996f-fb644abf65d2)   ![P3301858](https://github.com/user-attachments/assets/24f7163a-29e1-405d-b924-b4765fa1a93e)
 
+The spectra are acqired in two ranges, first from 150 kHz to 4.19 MHz in 450 steps of 9 kHz and with a 9 kHz RBW as specified by the CISPR25 standard. Then, from 4 MHz to 108 MHz in steps of 230 kHz but with the RBW still set to 9 kHz, not respecting the standard. The spectra are then stitched with the transition at 4 MHz.
 
 ![car_usb_cispr25_sm](https://github.com/user-attachments/assets/3106cafb-dbe1-4805-b6cc-f4ec154a514e)
 
+In red, the spectrum of the car charger operating from the lab power supply as shown before. At the 4 MHz transition, it seems that the TinySA adapts the RBW to the step size irrespective of its setting. In black, the background with the lab power supply left in place. In green, background with battery power instead of power supply. In cyan, the car charger operating from battery. It is noteworthy that at the transition of 4 MHz, the curve does not seem to follow the envelope as it did before. We have observed a sudden drop of the noise during the measurement under battery power. We suspect that during the acquisition with battery power, the voltage dropped and the mode of operation switched from switching mode to continuous conduction and therefore the noise decreased.
+
+It is also noteworthy that when the TinySA is set to the units dB µV, it is still necessary to apply a concversion of 20*log() to the touchstone files to obtain the same reading as on the TinySA display. Also, the NanoVNA saver does not seem to operate the device correctly. When presssing the sweep button, it restarts a sweep on the VNA, but it saves the data as on the screen from the previous, possibly incomplete sweep. So it can only instantaneously read the onscreen data but not start a sweep, wait until it is done and then save it.
+
+It is noteworthy that the USB charger would fail the CISPR25 test with its limit probably at 73 dB µV, but also that even the background spectra almost reach this value at low frequency. It is not the USB power of the TinySA that causes this because even when the TinySA is running on battery, it is that high. Probably it is just not made for such low frequency.
+
+What can also be concluded from the spectra is the switching frequency of the car charger. The first peak is at 250 kHz, the second at 375 kHz and the third one is at 500 kHz, and therefore, the switching frequency is equal to the spacing of 125 kHz, and the fundamental is not visible because the spectra start at 150 kHz.
