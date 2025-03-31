@@ -80,7 +80,7 @@ The LISN is powered by a lab power supply set to 14.8 V. The USB car charger mea
 
 ![P3301859](https://github.com/user-attachments/assets/766450e3-15d1-432a-996f-fb644abf65d2)   ![P3301858](https://github.com/user-attachments/assets/24f7163a-29e1-405d-b924-b4765fa1a93e)
 
-The spectra are acqired in two ranges, first from 150 kHz to 4.19 MHz in 450 steps of 9 kHz and with a 9 kHz RBW as specified by the CISPR25 standard. Then, from 4 MHz to 108 MHz in steps of 230 kHz but with the RBW still set to 9 kHz, not respecting the standard. The spectra are then stitched with the transition at 4 MHz.
+The spectra are acqired in two ranges, first from 150 kHz to 4.19 MHz in 450 steps of 9 kHz and with a 10 kHz RBW close to the 9 RBW BW specified by the CISPR25 standard. Then, from 4 MHz to 108 MHz, for the sake of saving time, we measure in steps of 230 kHz but with the RBW still set to 10 kHz, not respecting the standard that would usually require the measurement to be gapless. The spectra are then stitched together at the transition of 4 MHz.
 
 ![car_usb_cispr25_sm](https://github.com/user-attachments/assets/3106cafb-dbe1-4805-b6cc-f4ec154a514e)
 
