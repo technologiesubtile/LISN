@@ -71,3 +71,13 @@ We do so, and thereby realize that the calibration done in nanoVNA saver is no l
 Note that we also use semilog axes here as in the reference from EEVblog, which would also have been possible in the nanoVNA saver software. Now we find even better values, L = 4.83 uH, and the impedance only rises to 61 Ohm at 100 MHz.
 
 In conclusion, our LISN is quite close to the specifications since it only slightly excedes the impedance boundary at 100 MHz. At low frequency the inductance is close to the reference of 5 uH, and Z @ 1 MHz is 23 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
+
+
+![P3301856](https://github.com/user-attachments/assets/14b0b30d-408d-4514-85f1-5b6c8f2e1ebe) ![P3301855](https://github.com/user-attachments/assets/1b77e3b1-e0da-41b8-a32d-4b57c3f4872b)
+
+
+![P3301859](https://github.com/user-attachments/assets/766450e3-15d1-432a-996f-fb644abf65d2)  ![P3301858](https://github.com/user-attachments/assets/24f7163a-29e1-405d-b924-b4765fa1a93e)
+
+
+![car_usb_cispr25_sm](https://github.com/user-attachments/assets/3106cafb-dbe1-4805-b6cc-f4ec154a514e)
+
