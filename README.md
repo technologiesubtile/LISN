@@ -6,13 +6,13 @@ A LISN is a box that presents a well-defined source impedance to an electrical c
 ![eevblog_cispr_lisn_schematics](https://github.com/user-attachments/assets/2d3cc524-24a0-46f3-85c0-db89c3493d5f)
 
 
-Here is the schematics of a LISN that is quite standard, it is sold as Tekbox and the schematics and even the gerber files of the layout are published on the manufacturers website. It is a 5 µH, 50 Ohm version for voltage < 200 V and current < 10 A. This can be used to check compliance with standards such as CISPR25 for automotive applications. It furthermore requires a spectrum analyzer to be connected to its coax output and to measure the spectrum from 150 kHz to 100 MHz, and to make sure it stays below the tolerable curve.
+Here is the schematics of a LISN that is quite standard, it is sold as Tekbox and the schematics and even the gerber files of the layout are published on the manufacturers website. It is a 5 µH, 50 Ohm version for voltage < 200 V and current < 10 A. This can be used to check compliance with standards such as CISPR25 for automotive applications. It furthermore requires a spectrum analyzer to be connected to its coax output and to measure the spectrum from 150 kHz to 108 MHz, and to make sure it stays below the tolerable curve.
 
 ![P3151803](https://github.com/user-attachments/assets/8381b36a-c79b-439b-8ef4-f32638255485)
 
 I redeveloped the layout for a circuit identical to the Tekbox LISN to implement it with through-hole components. 
 
-Commercial units can be quite costly especially the ones for 230 VAC line voltage that usually feature an isolation transformer.
+Commercial units can be quite costly especially the ones for 230 VAC line voltage that also require an isolation transformer.
 
 Now we do some measurements of its output impedance with the NanoVNA. To give an idea what it should look like, here the curves for the upper and lower limits, copied screenshot from EEVblog, and in the middle, a LISN used by Dave in his youtube video. 
 
@@ -72,7 +72,7 @@ We do so, and thereby realize that the calibration done in nanoVNA saver is no l
 
 Note that we also use semilog axes here as in the reference from EEVblog, which would also have been possible in the nanoVNA saver software. Now we find even better values, L = 4.83 uH, and the impedance only rises to 61 Ohm at 100 MHz.
 
-In conclusion, our LISN is quite close to the specifications since it only slightly excedes the impedance boundary at 100 MHz. At low frequency the inductance is close to the reference of 5 uH, and Z @ 1 MHz is 23 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
+In conclusion, our LISN is quite close to the specifications since it only slightly excedes the impedance boundary at 100 MHz. At low frequency the inductance is close to the reference of 5 uH, and |Z| @ 1 MHz is 23 Ohm and is right in the middle between the boundaries. For all practical means this LISN should be good enough.
 
 Now we test a USB car charger. The setup is the car charger plugged into a cigarette lighter socket and connected to the LISN output. Attached to the USB charger is a power delivery trigger board that negotiates 12 V output, and a 25 W automotive light bulb (both filaments in parallel) as a load. On the right, the TinySA Ultra ZN-407 connected to the RF output of the LISN via a 20 dB attenuator that is taken into account by the setting "external gain" in the TinySA.
 
@@ -88,7 +88,8 @@ The spectra are acquired in two ranges, first from 150 kHz to 4.19 MHz in 450 st
 
 In red, the spectrum of the car charger operating from the lab power supply as shown before. Above the 4 MHz transition, i suspect that the TinySA adapts the RBW to the step size irrespective of its setting, and thereby the remainder of the curve seems to follow the envelope of the low frequency part. There was no quasi-peak detection enabled since the calc state was set to off. The VBW was set to auto. The black curve is the background with the lab power supply left in place. In green, the background with battery power instead of power supply. In cyan, the car charger operating from battery. It is noteworthy that under battery power, at the transition of 4 MHz, the curve does not seem to follow the envelope as it did before. We have observed a sudden drop of the noise during the measurement under battery power. We suspect that during the acquisition with battery power, the battery voltage dropped and the mode of operation switched from switching mode to continuous conduction and therefore the noise decreased.
 
-It is also noteworthy that when the TinySA is set to the units dB µV, it is still necessary to apply a conversion of 20*log() to the touchstone files to obtain the same reading as on the TinySA display. Also, the NanoVNA saver software used to obtain the touchstone files does not seem to operate the TinySA device correctly. When presssing the sweep button, it restarts a sweep on the SA, but it saves the data as on the screen from the previous, possibly incomplete sweep. So it can only instantaneously read the onscreen data but not start a sweep, wait until it is done and then save it.
+It is also noteworthy that when the TinySA is set to the units dB µV, it is still necessary to apply a conversion of 20*log() to the touchstone files to obtain the same reading as on the TinySA display. It means that the data is stored in uV. Similarly as the touchstone data is in mW when the display is set to dBm.
+Also, the NanoVNA saver software used to obtain the touchstone files does not seem to operate the TinySA device correctly. When presssing the sweep button, it restarts a sweep on the SA, but it saves the data as on the screen from the previous, possibly incomplete sweep. So it can only instantaneously read the onscreen data but not start a sweep, wait until it is done and then save it.
 
 It is understood that the USB charger would likely fail the CISPR25 test with its limit probably at 73 dB µV, but also that even the background spectra almost reach this value at low frequency. It is not the USB power of the TinySA that causes this because even when the TinySA is running on battery, it is that high. Probably it is just not made for such low frequency. Furthermore, the 20 dB attenuator is deteriorating the noise level but we have no other choice because we do not own a transient limiter and the parts for the internal protection of the LISN are not populated. All our measurements are very approximative. The test setup does not include the ground plate and we do not distinguish between threshold values for average or quasi-peak measurements.
 
